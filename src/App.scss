@@ -1,5 +1,17 @@
+@import './index.scss';
+
+body {
+  min-height: 100vh;
+  background: lighten($color: $light-harsh-color, $amount: 4);
+  display: flex;
+  font-family: $font-works;
+}
+
 #root {
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  // border: 1px solid $blue-color;
+  // padding: 2rem;
+  // text-align: center;
 }

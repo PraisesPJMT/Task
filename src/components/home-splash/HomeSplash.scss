@@ -1,0 +1,64 @@
+@import '../../index.scss';
+
+#splash {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 4rem;
+  color: $blue-color;
+
+  div {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  div:first-child {
+    margin-top: auto;
+
+    h1 {
+      font-weight: 900;
+    }
+
+    p {
+      color: $light-red-color;
+      font-style: italic;
+    }
+  }
+
+  div:last-child {
+    margin-bottom: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    button {
+      @include button;
+      font-family: $font-works;
+      font-size: 2rem;
+      padding: 1rem;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      box-shadow: 0px 10px 20px lighten($color: $red-color, $amount: 30);
+      transition: scale 100ms ease-in-out;
+    }
+
+    button:hover,
+    button:focus {
+      color: $red-color;
+      background: lighten($color: $light-red-color, $amount: 15);
+      scale: 1.05;
+    }
+
+    button:focus {
+      outline: 1px solid $red-color;
+    }
+  }
+}
