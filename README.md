@@ -1,7 +1,7 @@
 # 📗 Table of Contents <a name="readme-top"></a>
 
 - [📗 Table of Contents ](#-table-of-contents-)
-- [📖 T@sk ](#-tsk-)
+  - [📖 T@sk ](#-tsk-)
   - [🛠 Built With ](#-built-with-)
     - [⚙️ Tech Stack ](#️-tech-stack-)
     - [💡 Key Features ](#-key-features-)
@@ -20,7 +20,7 @@
   - [🙏 Acknowledgments ](#-acknowledgments-)
   - [📝 License ](#-license-)
 
-# 📖 T@sk <a name="tsk"></a>
+## 📖 T@sk <a name="tsk"></a>
 
 > T@sk is a web application where users can organise their personalised tasks by adding, editing and removing tasks from a list.
 
@@ -75,7 +75,7 @@
 
 > Comming soon ...
 
-- [Live Demo Link]()
+<!-- - [Live Demo Link]() -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -123,7 +123,7 @@ To run the project, execute the following command:
 
 ## 👥 Authors <a name="authors"></a>
 
-👤 **Author1**
+👤 **Praises Tula**
 
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/PraisesPJMT/)
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/praises-tula/)
