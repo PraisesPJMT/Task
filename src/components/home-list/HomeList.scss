@@ -1,0 +1,176 @@
+@import '../../index.scss';
+
+#home {
+  font-family: $font-works;
+  color: $blue-color;
+  background: none;
+
+  section:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+
+    h1 {
+      font-weight: 900;
+    }
+
+    p {
+      span:first-child {
+        font-weight: 600;
+      }
+    }
+  }
+
+  section:nth-child(2) {
+    background: $light-harsh-color;
+    padding: 1rem 2rem;
+
+    div:first-child {
+      display: flex;
+      justify-content: space-between;
+
+      p {
+        color: $red-color;
+        span:first-child {
+          font-weight: 600;
+          //   color: $harsh-color;
+        }
+      }
+    }
+
+    div:last-child {
+      p {
+        color: $red-color;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  section:last-child {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    & > div {
+      display: grid;
+      grid-template-columns: 1fr 5fr 0.8fr;
+      border-radius: 40px 0 40px 0;
+      box-shadow: 0px 5px 10px lighten($color: $harsh-color, $amount: 20),
+        -1px -1px 10px lighten($color: $harsh-color, $amount: 15);
+      //   border: 1px solid #ccc;
+
+      & > div:first-child {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // border: 1px solid #ccc;
+        border-radius: 40px 0 0 0;
+      }
+
+      & > div:last-child {
+        // border: 1px solid #ccc;
+        // background: #ccc;
+        border-radius: 0 0 40px 0;
+      }
+
+      & > div:nth-child(2) {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0.3rem;
+
+        & > div:first-child {
+          p {
+            color: $harsh-color;
+            font-size: 0.8rem;
+          }
+
+          h3 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            // padding: 0;
+          }
+        }
+
+        & > div:last-child {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          gap: 0.25rem;
+
+          & > button {
+            @include button;
+            text-align: start;
+            color: $blue-color;
+            font-weight: 500;
+            padding: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+
+            & > svg {
+              font-size: 1rem;
+            }
+
+            & > span {
+              display: none;
+            }
+          }
+
+          & > button:first-child:hover,
+          & > button:first-child:focus {
+            background: lighten($color: $blue-color, $amount: 70);
+          }
+
+          & > button:first-child:focus {
+            outline: 1px solid $blue-color;
+          }
+
+          & > button:last-child {
+            color: $red-color;
+          }
+
+          & > button:last-child:hover,
+          & > button:last-child:focus {
+            background: lighten($color: $red-color, $amount: 35);
+          }
+
+          & > button:last-child:focus {
+            outline: 1px solid $red-color;
+          }
+        }
+      }
+    }
+
+    & > button {
+      @include button;
+      font-family: $font-works;
+      font-size: 2rem;
+      padding: 1rem;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      box-shadow: 0px 10px 20px lighten($color: $red-color, $amount: 30);
+      transition: scale 100ms ease-in-out;
+    }
+
+    & > button:hover,
+    & > button:focus {
+      color: $red-color;
+      background: lighten($color: $light-red-color, $amount: 15);
+      scale: 1.05;
+    }
+
+    & > button:focus {
+      outline: 1px solid $red-color;
+    }
+  }
+}
