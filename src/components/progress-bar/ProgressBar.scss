@@ -1,0 +1,22 @@
+@import '../../index.scss';
+
+.progress-bar {
+  height: 25px;
+  width: 100%;
+  border-radius: 20px;
+  border: 2px solid lighten($color: $light-red-color, $amount: 8);
+
+  & > div {
+    height: 20px;
+    border-radius: 20px;
+    border: none;
+    background: linear-gradient(to left, $red-color, $light-red-color);
+    box-shadow: 0 3px 3px -5px $red-color, 0 2px 5px $light-red-color;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    min-width: 30px;
+  }
+}
