@@ -7,9 +7,9 @@ export interface TaskType {
 }
 
 export interface ListType {
-  id: string;
+  id: string | undefined;
   title: string;
-  lastModified: string;
+  lastModified: Date;
   theme: string;
   tasks: TaskType[];
 }
@@ -17,4 +17,9 @@ export interface ListType {
 export interface AppState {
   list: ListType[];
   errors: {}[];
+}
+
+export interface ListError {
+  title: string;
+  theme: string;
 }

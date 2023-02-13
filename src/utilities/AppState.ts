@@ -16,47 +16,18 @@ interface ErrorAction {
 
 export type ActionType = ErrorAction | ListAction;
 
-const List = [
-  {
-    id: 'AA',
-    title: 'Today Tasks',
-    lastModified: '2023-02-12',
-    theme: 'green',
-    tasks: [
-      {
-        id: 'AA1',
-        title: 'Brush teeth',
-        note: 'Brush my teet',
-        date: '2023-02-13',
-        complete: false,
-      },
-      {
-        id: 'AA2',
-        title: 'Brush teeth',
-        note: 'Brush my teet',
-        date: '2023-02-13',
-        complete: false,
-      },
-      {
-        id: 'AA3',
-        title: 'Brush teeth',
-        note: 'Brush my teet',
-        date: '2023-02-13',
-        complete: true,
-      },
-    ],
-  },
-  {
-    id: 'AB',
-    title: 'Today Tasks',
-    lastModified: '2023-02-12',
-    theme: 'blue',
-    tasks: [],
-  },
-];
+let storedList;
+
+const storage = localStorage.getItem('tasks');
+
+if (typeof storage === 'string') {
+    storedList = JSON.parse(storage).list;
+} else {
+    storedList = [];
+}
 
 export const initialState = {
-  list: List || [],
+  list: storedList,
   errors: [],
 };
 

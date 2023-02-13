@@ -1,19 +1,18 @@
 import { DAYS, MONTHS } from './Data';
 import { ListType } from './Type';
 
-export const getTodaysDate = () => {
-  const today = new Date();
+export const getTodaysDate = (input: Date | string) => {
+  const date = new Date(input);
   let aft = 'th';
 
-  if (today.getDate() % 10 === 1) aft = 'st';
-  if (today.getDate() > 20 && today.getDate() % 10 === 2) aft = 'nd';
-  if (today.getDate() > 20 && today.getDate() % 10 === 3) aft = 'rd';
+  if (date.getDate() % 10 === 1) aft = 'st';
+  if (date.getDate() > 20 && date.getDate() % 10 === 2) aft = 'nd';
+  if (date.getDate() > 20 && date.getDate() % 10 === 3) aft = 'rd';
 
   return {
-    day: DAYS[today.getDay()],
-    rest: `${today.getDate()}${aft} ${MONTHS[today.getMonth()]}`,
+    day: DAYS[date.getDay()],
+    rest: `${date.getDate()}${aft} ${MONTHS[date.getMonth()]}`,
   };
-  // Wednesday 20th March
 };
 
 export const getSummary = (list: ListType[]) => {
@@ -23,14 +22,23 @@ export const getSummary = (list: ListType[]) => {
   list.forEach((item) => {
     item.tasks.forEach((task) => {
       tasks++;
-      if (task.complete) completed++;
+      if (task.complete === true) completed++;
     });
   });
 
-  // console.log({ lists, completed: (completed / tasks) * 100, tasks });
+  if (completed > 0)
+    completed = Math.round((completed / tasks) * 100 * 10) / 10;
+
   return {
     lists,
-    completed: Math.round((completed / tasks) * 100 * 10) / 10,
+    completed,
     tasks,
   };
+};
+
+export const getListId = (id: string | undefined) => {
+  if (id === undefined) return 'AA';
+  if (id.charCodeAt(1) < 90)
+    return id.charAt(0) + String.fromCharCode(id.charCodeAt(1) + 1);
+  return String.fromCharCode(id.charCodeAt(0) + 1) + 'A';
 };
