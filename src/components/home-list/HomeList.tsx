@@ -1,20 +1,33 @@
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect } from 'react';
 import { ActionType } from '../../utilities/AppState';
 import { getSummary, getTodaysDate } from '../../utilities/Helpers';
-import { AppState } from '../../utilities/Type';
+import { AppState, ListType } from '../../utilities/Type';
 import ProgressBar from '../progress-bar/ProgressBar';
 import './HomeList.scss';
 
 interface HomeListProps {
   addList: () => void;
+  editList: () => void;
   state: AppState;
   dispatch: React.Dispatch<ActionType>;
 }
 
-const HomeList: React.FC<HomeListProps> = ({ addList, state, dispatch }) => {
+const HomeList: React.FC<HomeListProps> = ({
+  addList,
+  editList,
+  state,
+  dispatch,
+}) => {
   const { lists, completed, tasks } = getSummary(state.list);
   const { day, rest } = getTodaysDate(new Date());
+
+  const handleEdit = (list: ListType) => {
+    dispatch({ type: 'SET_EDIT_LIST', payload: list });
+    editList();
+  };
+
   return (
     <section id="home">
       <section>
@@ -54,11 +67,16 @@ const HomeList: React.FC<HomeListProps> = ({ addList, state, dispatch }) => {
                 <p>{item.tasks.length} tasks</p>
               </div>
               <div>
-                <button type="button">
+                <button type="button" onClick={() => handleEdit(item)}>
                   <FontAwesomeIcon icon={faPenToSquare} />
                   <span>Edit</span>
                 </button>
-                <button type="button" onClick={() => dispatch({ type: 'DELETE_LIST', payload: item.id })}>
+                <button
+                  type="button"
+                  onClick={() =>
+                    dispatch({ type: 'DELETE_LIST', payload: item.id })
+                  }
+                >
                   <FontAwesomeIcon icon={faTrashCan} />
                   <span>Delete</span>
                 </button>

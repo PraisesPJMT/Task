@@ -1,7 +1,7 @@
 import { AppState, ListType } from './Type';
 
 interface ListAction {
-  type: 'ADD_LIST' | 'EDIT_LIST';
+  type: 'ADD_LIST' | 'EDIT_LIST' | 'SET_EDIT_LIST';
   payload: ListType;
 }
 
@@ -10,16 +10,11 @@ interface DeleteAction {
   payload: string | undefined;
 }
 
-interface ErrorAction {
-  type:
-    | 'SET_LIST_ERROR'
-    | 'CLEAR_LIST_ERRORS'
-    | 'SET_TASK_ERROR'
-    | 'CLEAR_TASK_ERRORS';
-  payload: {};
+interface ClearEditListActions {
+  type: 'CLEAR_EDIT_LIST';
 }
 
-export type ActionType = ErrorAction | ListAction | DeleteAction;
+export type ActionType = ListAction | DeleteAction | ClearEditListActions;
 
 let storedList;
 
@@ -31,9 +26,17 @@ if (typeof storage === 'string') {
   storedList = [];
 }
 
+export const initialEditState = {
+  id: '',
+  title: '',
+  lastModified: new Date(),
+  theme: '',
+  tasks: [],
+};
+
 export const initialState = {
   list: storedList,
-  errors: [],
+  listEdit: initialEditState,
 };
 
 export const reducer = (state: AppState, action: ActionType) => {
@@ -45,6 +48,22 @@ export const reducer = (state: AppState, action: ActionType) => {
       return {
         ...state,
         list: [...state.list.filter((item) => item.id !== action.payload)],
+      };
+
+    case 'SET_EDIT_LIST':
+      return { ...state, listEdit: action.payload };
+
+    case 'CLEAR_EDIT_LIST':
+      return { ...state, listEdit: initialEditState };
+
+    case 'EDIT_LIST':
+      return {
+        ...state,
+        list: [
+          ...state.list.map((item) =>
+            item.id === action.payload.id ? action.payload : item
+          ),
+        ],
       };
 
     default:

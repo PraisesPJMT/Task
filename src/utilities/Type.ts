@@ -16,7 +16,7 @@ export interface ListType {
 
 export interface AppState {
   list: ListType[];
-  errors: {}[];
+  listEdit: ListType;
 }
 
 export interface ListError {
