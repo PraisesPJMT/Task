@@ -7,13 +7,14 @@ import ProgressBar from '../progress-bar/ProgressBar';
 import './HomeList.scss';
 
 interface HomeListProps {
+  addList: () => void;
   state: AppState;
   dispatch: React.Dispatch<ActionType>;
 }
 
-const HomeList: React.FC<HomeListProps> = ({ state, dispatch }) => {
+const HomeList: React.FC<HomeListProps> = ({ addList, state, dispatch }) => {
   const { lists, completed, tasks } = getSummary(state.list);
-  const { day, rest } = getTodaysDate();
+  const { day, rest } = getTodaysDate(new Date());
   return (
     <section id="home">
       <section>
@@ -41,11 +42,14 @@ const HomeList: React.FC<HomeListProps> = ({ state, dispatch }) => {
       </section>
       <section>
         {state.list.map((item) => (
-          <div>
-            <div>{/* <input type="checkbox" /> */}</div>
+          <div key={item.id}>
+            <div />
             <div>
               <div>
-                <p>Edited: {item.lastModified}</p>
+                <p>
+                  Edited: <span>{getTodaysDate(item.lastModified).day} </span>
+                  <span>{getTodaysDate(item.lastModified).rest}</span>
+                </p>
                 <h3>{item.title}</h3>
                 <p>{item.tasks.length} tasks</p>
               </div>
@@ -63,7 +67,9 @@ const HomeList: React.FC<HomeListProps> = ({ state, dispatch }) => {
             <div style={{ background: `${item.theme}` }} />
           </div>
         ))}
-        <button type="button">+</button>
+        <button type="button" onClick={() => addList()}>
+          +
+        </button>
       </section>
     </section>
   );

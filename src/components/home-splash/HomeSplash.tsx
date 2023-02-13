@@ -1,6 +1,10 @@
 import './HomeSplash.scss';
 
-const HomeSplash: React.FC<{}> = () => {
+interface HomeSplashProps {
+  setOpen: () => void;
+}
+
+const HomeSplash: React.FC<HomeSplashProps> = ({ setOpen }) => {
   return (
     <section id="splash">
       <div>
@@ -11,7 +15,7 @@ const HomeSplash: React.FC<{}> = () => {
       </div>
       <div>
         <p>Start by creating a new list</p>
-        <button type="button">+</button>
+        <button type="button" onClick={() => setOpen()}>+</button>
       </div>
     </section>
   );
