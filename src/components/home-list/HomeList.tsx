@@ -58,7 +58,7 @@ const HomeList: React.FC<HomeListProps> = ({ addList, state, dispatch }) => {
                   <FontAwesomeIcon icon={faPenToSquare} />
                   <span>Edit</span>
                 </button>
-                <button type="button">
+                <button type="button" onClick={() => dispatch({ type: 'DELETE_LIST', payload: item.id })}>
                   <FontAwesomeIcon icon={faTrashCan} />
                   <span>Delete</span>
                 </button>
