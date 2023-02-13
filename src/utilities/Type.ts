@@ -7,14 +7,19 @@ export interface TaskType {
 }
 
 export interface ListType {
-  id: string;
+  id: string | undefined;
   title: string;
-  lastModified: string;
+  lastModified: Date;
   theme: string;
   tasks: TaskType[];
 }
 
 export interface AppState {
   list: ListType[];
-  errors: {}[];
+  listEdit: ListType;
+}
+
+export interface ListError {
+  title: string;
+  theme: string;
 }

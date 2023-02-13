@@ -1,19 +1,33 @@
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect } from 'react';
 import { ActionType } from '../../utilities/AppState';
 import { getSummary, getTodaysDate } from '../../utilities/Helpers';
-import { AppState } from '../../utilities/Type';
+import { AppState, ListType } from '../../utilities/Type';
 import ProgressBar from '../progress-bar/ProgressBar';
 import './HomeList.scss';
 
 interface HomeListProps {
+  addList: () => void;
+  editList: () => void;
   state: AppState;
   dispatch: React.Dispatch<ActionType>;
 }
 
-const HomeList: React.FC<HomeListProps> = ({ state, dispatch }) => {
+const HomeList: React.FC<HomeListProps> = ({
+  addList,
+  editList,
+  state,
+  dispatch,
+}) => {
   const { lists, completed, tasks } = getSummary(state.list);
-  const { day, rest } = getTodaysDate();
+  const { day, rest } = getTodaysDate(new Date());
+
+  const handleEdit = (list: ListType) => {
+    dispatch({ type: 'SET_EDIT_LIST', payload: list });
+    editList();
+  };
+
   return (
     <section id="home">
       <section>
@@ -41,20 +55,28 @@ const HomeList: React.FC<HomeListProps> = ({ state, dispatch }) => {
       </section>
       <section>
         {state.list.map((item) => (
-          <div>
-            <div>{/* <input type="checkbox" /> */}</div>
+          <div key={item.id}>
+            <div />
             <div>
               <div>
-                <p>Edited: {item.lastModified}</p>
+                <p>
+                  Edited: <span>{getTodaysDate(item.lastModified).day} </span>
+                  <span>{getTodaysDate(item.lastModified).rest}</span>
+                </p>
                 <h3>{item.title}</h3>
                 <p>{item.tasks.length} tasks</p>
               </div>
               <div>
-                <button type="button">
+                <button type="button" onClick={() => handleEdit(item)}>
                   <FontAwesomeIcon icon={faPenToSquare} />
                   <span>Edit</span>
                 </button>
-                <button type="button">
+                <button
+                  type="button"
+                  onClick={() =>
+                    dispatch({ type: 'DELETE_LIST', payload: item.id })
+                  }
+                >
                   <FontAwesomeIcon icon={faTrashCan} />
                   <span>Delete</span>
                 </button>
@@ -63,7 +85,9 @@ const HomeList: React.FC<HomeListProps> = ({ state, dispatch }) => {
             <div style={{ background: `${item.theme}` }} />
           </div>
         ))}
-        <button type="button">+</button>
+        <button type="button" onClick={() => addList()}>
+          +
+        </button>
       </section>
     </section>
   );

@@ -1,69 +1,70 @@
 import { AppState, ListType } from './Type';
 
 interface ListAction {
-  type: 'ADD_LIST' | 'EDIT_LIST' | 'DELETE_LIST';
+  type: 'ADD_LIST' | 'EDIT_LIST' | 'SET_EDIT_LIST';
   payload: ListType;
 }
 
-interface ErrorAction {
-  type:
-    | 'SET_LIST_ERROR'
-    | 'CLEAR_LIST_ERRORS'
-    | 'SET_TASK_ERROR'
-    | 'CLEAR_TASK_ERRORS';
-  payload: {};
+interface DeleteAction {
+  type: 'DELETE_LIST';
+  payload: string | undefined;
 }
 
-export type ActionType = ErrorAction | ListAction;
+interface ClearEditListActions {
+  type: 'CLEAR_EDIT_LIST';
+}
 
-const List = [
-  {
-    id: 'AA',
-    title: 'Today Tasks',
-    lastModified: '2023-02-12',
-    theme: 'green',
-    tasks: [
-      {
-        id: 'AA1',
-        title: 'Brush teeth',
-        note: 'Brush my teet',
-        date: '2023-02-13',
-        complete: false,
-      },
-      {
-        id: 'AA2',
-        title: 'Brush teeth',
-        note: 'Brush my teet',
-        date: '2023-02-13',
-        complete: false,
-      },
-      {
-        id: 'AA3',
-        title: 'Brush teeth',
-        note: 'Brush my teet',
-        date: '2023-02-13',
-        complete: true,
-      },
-    ],
-  },
-  {
-    id: 'AB',
-    title: 'Today Tasks',
-    lastModified: '2023-02-12',
-    theme: 'blue',
-    tasks: [],
-  },
-];
+export type ActionType = ListAction | DeleteAction | ClearEditListActions;
+
+let storedList;
+
+const storage = localStorage.getItem('tasks');
+
+if (typeof storage === 'string') {
+  storedList = JSON.parse(storage).list;
+} else {
+  storedList = [];
+}
+
+export const initialEditState = {
+  id: '',
+  title: '',
+  lastModified: new Date(),
+  theme: '',
+  tasks: [],
+};
 
 export const initialState = {
-  list: List || [],
-  errors: [],
+  list: storedList,
+  listEdit: initialEditState,
 };
 
 export const reducer = (state: AppState, action: ActionType) => {
   switch (action.type) {
     case 'ADD_LIST':
       return { ...state, list: [...state.list, action.payload] };
+
+    case 'DELETE_LIST':
+      return {
+        ...state,
+        list: [...state.list.filter((item) => item.id !== action.payload)],
+      };
+
+    case 'SET_EDIT_LIST':
+      return { ...state, listEdit: action.payload };
+
+    case 'CLEAR_EDIT_LIST':
+      return { ...state, listEdit: initialEditState };
+
+    case 'EDIT_LIST':
+      return {
+        ...state,
+        list: [
+          ...state.list.map((item) =>
+            item.id === action.payload.id ? action.payload : item
+          ),
+        ],
+      };
 
     default:
       return state;
