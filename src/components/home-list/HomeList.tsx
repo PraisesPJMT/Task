@@ -1,6 +1,6 @@
-import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect } from 'react';
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { ActionType } from '../../utilities/AppState';
 import { getSummary, getTodaysDate } from '../../utilities/Helpers';
 import { AppState, ListType } from '../../utilities/Type';
@@ -20,6 +20,7 @@ const HomeList: React.FC<HomeListProps> = ({
   state,
   dispatch,
 }) => {
+  const navigate = useNavigate();
   const { lists, completed, tasks } = getSummary(state.list);
   const { day, rest } = getTodaysDate(new Date());
 
@@ -55,7 +56,7 @@ const HomeList: React.FC<HomeListProps> = ({
       </section>
       <section>
         {state.list.map((item) => (
-          <div key={item.id}>
+          <div key={item.id} onClick={() => navigate(`/list/${item.id}`)}>
             <div />
             <div>
               <div>
@@ -66,7 +67,7 @@ const HomeList: React.FC<HomeListProps> = ({
                 <h3>{item.title}</h3>
                 <p>{item.tasks.length} tasks</p>
               </div>
-              <div>
+              <div onClick={(e) => e.stopPropagation()}>
                 <button type="button" onClick={() => handleEdit(item)}>
                   <FontAwesomeIcon icon={faPenToSquare} />
                   <span>Edit</span>

@@ -1,13 +1,18 @@
-import { useReducer, useState } from 'react';
-import { initialState, reducer } from '../../utilities/AppState';
+import { useState } from 'react';
+import { ActionType } from '../../utilities/AppState';
 import HomeSplash from '../../components/home-splash/HomeSplash';
 import HomeList from '../../components/home-list/HomeList';
 import AddListDialog from '../../components/add-list-dialogue/AddListDialog';
 import './Home.scss';
 import EditListDialog from '../../components/edit-list-dialogue/EditListDialog';
+import { AppState } from '../../utilities/Type';
 
-const Home: React.FC<{}> = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+interface HomeProps {
+  state: AppState;
+  dispatch: React.Dispatch<ActionType>;
+}
+
+const Home: React.FC<HomeProps> = ({ state, dispatch }) => {
   const [openListDialog, setOpenListDialog] = useState(false);
   const [openListEditDialog, setOpenListEditDialog] = useState(false);
 
