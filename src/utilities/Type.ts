@@ -2,7 +2,7 @@ export interface TaskType {
   id: string;
   title: string;
   note: string;
-  date: string;
+  date: string | Date;
   complete: boolean;
 }
 

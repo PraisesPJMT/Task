@@ -14,8 +14,10 @@ const HomeSplash: React.FC<HomeSplashProps> = ({ setOpen }) => {
         </p>
       </div>
       <div>
-        <p>Start by creating a new list</p>
-        <button type="button" onClick={() => setOpen()}>+</button>
+        <p>Start by creating a new list of tasks</p>
+        <button type="button" onClick={() => setOpen()}>
+          +
+        </button>
       </div>
     </section>
   );

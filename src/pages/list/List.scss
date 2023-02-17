@@ -1,0 +1,259 @@
+@import '../../index.scss';
+
+#list {
+  font-family: $font-works;
+  color: $blue-color;
+  background: none;
+
+  & > section:first-child {
+    section:first-child {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem;
+
+      & div:first-child {
+        h1 {
+          font-weight: 900;
+        }
+
+        p {
+          font-size: 0.6rem;
+          span:first-child {
+            font-weight: 600;
+          }
+        }
+      }
+
+      & div:last-child {
+        p {
+          font-size: 0.8rem;
+          color: $red-color;
+
+          span {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    section:nth-child(2) {
+      background: $light-harsh-color;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+
+      & div {
+        padding: 0.4rem 0.9rem;
+        border-radius: 20px 0 20px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        & p {
+          font-size: 0.75rem;
+          font-weight: 500;
+        }
+      }
+
+      & > div:nth-child(1),
+      & > div:nth-child(2) {
+        background: lighten($color: $light-harsh-color, $amount: 4);
+
+        p {
+          opacity: 0.4;
+        }
+      }
+
+      & > div:nth-child(3) {
+        background: lighten($color: $light-red-color, $amount: 8);
+      }
+
+      & > div:nth-child(4),
+      & > div:nth-child(5),
+      & > div:nth-child(6) {
+        background: lighten($color: $harsh-color, $amount: 14);
+      }
+    }
+  }
+
+  & > section:last-child {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    & .list-splash {
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    & .task-nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.2rem;
+
+      & button {
+        @include button;
+        color: $harsh-color;
+        font-weight: 700;
+        padding: 0.1rem 0.2rem;
+        cursor: pointer;
+      }
+
+      & button:hover,
+      & button.active {
+        color: $blue-color;
+      }
+
+      & button.active {
+        text-decoration: underline;
+      }
+    }
+
+    & .tasks {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    & .task {
+      display: grid;
+      grid-template-columns: 1fr 5fr 0.8fr;
+      border-radius: 40px 0 40px 0;
+      box-shadow: 0px 5px 10px lighten($color: $harsh-color, $amount: 20),
+        -1px -1px 10px lighten($color: $harsh-color, $amount: 15);
+
+      & > div:first-child {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 40px 0 0 0;
+
+        & > button {
+          @include button;
+          padding: 0.2rem;
+          cursor: pointer;
+
+          & > div {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            padding: 0.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 0.55rem;
+            font-weight: 900;
+          }
+        }
+      }
+
+      & > div:last-child {
+        border-radius: 0 0 40px 0;
+      }
+
+      & > div:nth-child(2) {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0.3rem;
+
+        & > div:first-child {
+          p {
+            color: $harsh-color;
+            font-size: 0.6rem;
+          }
+
+          h3 {
+            font-size: 0.8rem;
+            font-weight: 700;
+          }
+        }
+
+        & > div:last-child {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          gap: 0.25rem;
+
+          & > button {
+            @include button;
+            text-align: start;
+            color: $blue-color;
+            font-weight: 500;
+            padding: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+
+            & > svg {
+              font-size: 1rem;
+            }
+
+            & > span {
+              display: none;
+            }
+          }
+
+          & > button:first-child:hover,
+          & > button:first-child:focus {
+            background: lighten($color: $blue-color, $amount: 70);
+          }
+
+          & > button:first-child:focus {
+            outline: 1px solid $blue-color;
+          }
+
+          & > button:last-child {
+            color: $red-color;
+          }
+
+          & > button:last-child:hover,
+          & > button:last-child:focus {
+            background: lighten($color: $red-color, $amount: 35);
+          }
+
+          & > button:last-child:focus {
+            outline: 1px solid $red-color;
+          }
+        }
+      }
+    }
+
+    & .task.complete {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    & > button {
+      @include button;
+      font-family: $font-works;
+      font-size: 2rem;
+      padding: 1rem;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      box-shadow: 0px 10px 20px lighten($color: $red-color, $amount: 30);
+      transition: scale 100ms ease-in-out;
+    }
+
+    & > button:hover,
+    & > button:focus {
+      color: $red-color;
+      background: lighten($color: $light-red-color, $amount: 15);
+      scale: 1.05;
+    }
+
+    & > button:focus {
+      outline: 1px solid $red-color;
+    }
+  }
+}
