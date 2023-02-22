@@ -61,7 +61,7 @@ const List: React.FC<ListProps> = ({ state, dispatch }) => {
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(state));
     updateSelection();
-  }, [state]);
+  }, [state, list.tasks.length]);
 
   return (
     <main>
@@ -176,7 +176,16 @@ const List: React.FC<ListProps> = ({ state, dispatch }) => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                             <span>Edit</span>
                           </button>
-                          <button className="task-btn" type="button">
+                          <button
+                            className="task-btn"
+                            type="button"
+                            onClick={() =>
+                              dispatch({
+                                type: 'DELETE_TASK',
+                                payload: { listId, taskId: item.id },
+                              })
+                            }
+                          >
                             <FontAwesomeIcon icon={faTrashCan} />
                             <span>Delete</span>
                           </button>

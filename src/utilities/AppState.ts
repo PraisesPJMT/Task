@@ -10,8 +10,8 @@ interface TaskAction {
   payload: { listId: string | undefined; task: TaskType };
 }
 
-interface CompleteTaskAction {
-  type: 'COMPLETE_TASK';
+interface CompDelTaskAction {
+  type: 'COMPLETE_TASK' | 'DELETE_TASK';
   payload: { listId: string | undefined; taskId: string | undefined };
 }
 
@@ -29,7 +29,7 @@ export type ActionType =
   | DeleteAction
   | ClearEditListActions
   | TaskAction
-  | CompleteTaskAction;
+  | CompDelTaskAction;
 
 let storedList;
 
@@ -108,6 +108,25 @@ export const reducer = (state: AppState, action: ActionType) => {
                       task.id === action.payload.taskId
                         ? { ...task, complete: !task.complete }
                         : task
+                    ),
+                  ],
+                }
+              : list
+          ),
+        ],
+      };
+
+    case 'DELETE_TASK':
+      return {
+        ...state,
+        list: [
+          ...state.list.map((list) =>
+            list.id === action.payload.listId
+              ? {
+                  ...list,
+                  tasks: [
+                    ...list.tasks.filter(
+                      (task) => task.id !== action.payload.taskId
                     ),
                   ],
                 }
