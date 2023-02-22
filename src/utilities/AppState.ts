@@ -1,8 +1,13 @@
-import { AppState, ListType } from './Type';
+import { AppState, ListType, TaskType } from './Type';
 
 interface ListAction {
   type: 'ADD_LIST' | 'EDIT_LIST' | 'SET_EDIT_LIST';
   payload: ListType;
+}
+
+interface TaskAction {
+  type: 'ADD_TASK' | 'EDIT_TASK' | 'SET_EDIT_TASK';
+  payload: { listId: string | undefined; task: TaskType };
 }
 
 interface DeleteAction {
@@ -14,7 +19,11 @@ interface ClearEditListActions {
   type: 'CLEAR_EDIT_LIST';
 }
 
-export type ActionType = ListAction | DeleteAction | ClearEditListActions;
+export type ActionType =
+  | ListAction
+  | DeleteAction
+  | ClearEditListActions
+  | TaskAction;
 
 let storedList;
 
@@ -41,6 +50,7 @@ export const initialState = {
 
 export const reducer = (state: AppState, action: ActionType) => {
   switch (action.type) {
+    // List Actions
     case 'ADD_LIST':
       return { ...state, list: [...state.list, action.payload] };
 
@@ -62,6 +72,19 @@ export const reducer = (state: AppState, action: ActionType) => {
         list: [
           ...state.list.map((item) =>
             item.id === action.payload.id ? action.payload : item
+          ),
+        ],
+      };
+
+    // Task Actions
+    case 'ADD_TASK':
+      return {
+        ...state,
+        list: [
+          ...state.list.map((list) =>
+            list.id === action.payload.listId
+              ? { ...list, tasks: [...list.tasks, action.payload.task] }
+              : list
           ),
         ],
       };

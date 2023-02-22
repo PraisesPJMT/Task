@@ -23,3 +23,8 @@ export interface ListError {
   title: string;
   theme: string;
 }
+
+export interface TaskError {
+  title: string;
+  // desc: string;
+}
