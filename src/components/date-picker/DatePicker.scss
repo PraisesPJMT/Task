@@ -1,0 +1,72 @@
+@import '../../index.scss';
+
+#date-picker {
+  width: 100%;
+  background: #ebeaea;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+
+    h4 {
+      color: $blue-color;
+    }
+
+    button {
+      @include button;
+      color: $harsh-color;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    button:hover {
+      color: $blue-color;
+      text-decoration: underline;
+    }
+  }
+
+  .body {
+    width: 90%;
+    margin: 0 auto;
+
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.4rem;
+    }
+
+    .days {
+      button {
+        @include button;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0.2rem 0.7rem;
+        border-radius: 20px 0 20px 0;
+        cursor: pointer;
+        box-sizing: border-box;
+        // background: #fff;
+
+        & span {
+          font-size: 0.75rem;
+          font-weight: 600;
+        }
+      }
+
+      button:hover,
+      button:focus {
+        outline: none;
+        border: none;
+        background-color: #e9aca6aa !important;
+      }
+    }
+  }
+}
