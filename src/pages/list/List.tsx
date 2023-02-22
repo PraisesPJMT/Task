@@ -61,7 +61,7 @@ const List: React.FC<ListProps> = ({ state, dispatch }) => {
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(state));
     updateSelection();
-  }, [list.tasks.length]);
+  }, [state]);
 
   return (
     <main>
@@ -142,7 +142,15 @@ const List: React.FC<ListProps> = ({ state, dispatch }) => {
                       className={`task ${item.complete ? 'complete' : ''}`}
                     >
                       <div>
-                        <button type="button">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            dispatch({
+                              type: 'COMPLETE_TASK',
+                              payload: { listId, taskId: item.id },
+                            })
+                          }
+                        >
                           {item.complete ? (
                             <div style={{ background: list.theme }}>
                               <FontAwesomeIcon icon={faCheck} />
