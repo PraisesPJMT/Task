@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ActionType } from '../../utilities/AppState';
 import { initialError, THEMES } from '../../utilities/Data';
-import { getListId, getTodaysDate } from '../../utilities/Helpers';
+import { getTodaysDate } from '../../utilities/Helpers';
 import { AppState } from '../../utilities/Type';
 import './EditListDialogue.scss';
 
@@ -62,6 +62,11 @@ const EditListDialog: React.FC<EditListDialogProps> = ({
     setTheme(theme);
   };
 
+  const handleClose = () => {
+    setOpen();
+    dispatch({ type: 'CLEAR_EDIT_LIST' });
+  };
+
   useEffect(() => {
     setTitle(state.listEdit.title);
     setTheme(state.listEdit.theme);
@@ -72,7 +77,7 @@ const EditListDialog: React.FC<EditListDialogProps> = ({
   return isOpen ? (
     <section id="edit-list-dialog">
       <div>
-        <button type="button" onClick={() => setOpen()}>
+        <button type="button" onClick={handleClose}>
           +
         </button>
         <div>

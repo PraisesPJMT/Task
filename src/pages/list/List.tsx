@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import AddTaskDialog from '../../components/add-task-dialogue/AddTaskDialog';
+import EditTaskDialog from '../../components/edit-task-dialogue/EditTaskDialog';
 import { ActionType } from '../../utilities/AppState';
 import {
   getDays,
@@ -26,6 +27,7 @@ interface ListProps {
 
 const List: React.FC<ListProps> = ({ state, dispatch }) => {
   const [openTaskDialog, setOpenTaskDialog] = useState(false);
+  const [openTaskEditDialog, setOpenTaskEditDialog] = useState(false);
   const { listId } = useParams();
 
   const list: ListType = getList(state.list, listId);
@@ -52,6 +54,14 @@ const List: React.FC<ListProps> = ({ state, dispatch }) => {
         setTasks(list.tasks);
         break;
     }
+  };
+
+  const handleEdit = (task: TaskType) => {
+    dispatch({
+      type: 'SET_EDIT_TASK',
+      payload: { listId, task },
+    });
+    setOpenTaskEditDialog(true);
   };
 
   useEffect(() => {
@@ -172,7 +182,11 @@ const List: React.FC<ListProps> = ({ state, dispatch }) => {
                           <p>{item.note}</p>
                         </div>
                         <div onClick={(e) => e.stopPropagation()}>
-                          <button type="button" className="task-btn">
+                          <button
+                            type="button"
+                            className="task-btn"
+                            onClick={() => handleEdit(item)}
+                          >
                             <FontAwesomeIcon icon={faPenToSquare} />
                             <span>Edit</span>
                           </button>
@@ -215,6 +229,15 @@ const List: React.FC<ListProps> = ({ state, dispatch }) => {
         dispatch={dispatch}
         isOpen={openTaskDialog}
         setOpen={() => setOpenTaskDialog(false)}
+      />
+      <EditTaskDialog
+        listTitle={list.title}
+        listId={listId}
+        theme={list.theme}
+        state={state}
+        dispatch={dispatch}
+        isOpen={openTaskEditDialog}
+        setOpen={() => setOpenTaskEditDialog(false)}
       />
     </main>
   );

@@ -1,6 +1,6 @@
 @import '../../index.scss';
 
-#add-task-dialog {
+#edit-task-dialog {
   position: fixed;
   top: 0;
   left: 0;
@@ -92,7 +92,7 @@
         }
 
         span::after {
-          content: 'NEW TASK';
+          content: 'EDIT TASK';
           font-size: 0.8rem;
           font-weight: 700;
           font-family: $font-works;

@@ -1,44 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActionType } from '../../utilities/AppState';
 import { initialTaskError } from '../../utilities/Data';
-import {
-  getListId,
-  getNewTaskId,
-  getTheme,
-  getTodaysDate,
-} from '../../utilities/Helpers';
-import { AppState, ListType } from '../../utilities/Type';
+import { getTheme, getTodaysDate } from '../../utilities/Helpers';
+import { AppState } from '../../utilities/Type';
 import DatePicker from '../date-picker/DatePicker';
-import './AddTaskDialog.scss';
+import './EditTaskDialog.scss';
 
-interface AddTaskDialogProps {
-  listTitle: string;
+interface EditTaskDialogProps {
   listId: string | undefined;
+  listTitle: string;
   theme: string;
-  lastTaskId: string | undefined;
   state: AppState;
   dispatch: React.Dispatch<ActionType>;
   isOpen: boolean;
   setOpen: () => void;
 }
 
-const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
-  listTitle,
+const EditTaskDialog: React.FC<EditTaskDialogProps> = ({
   listId,
+  listTitle,
   theme,
-  lastTaskId,
+  state,
   dispatch,
   isOpen,
   setOpen,
 }) => {
-  const [title, setTitle] = useState('');
-  const [desc, setDesc] = useState('');
+  const [title, setTitle] = useState(state.taskEdit.title);
+  const [desc, setDesc] = useState(state.taskEdit.note);
 
   // Date & Time
-  const [year, setYear] = useState(new Date().getFullYear());
-  const [month, setMonth] = useState(new Date().getMonth());
-  const [date, setDate] = useState(new Date().getDate());
-  const [time, setTime] = useState('12:30');
+  const [year, setYear] = useState(new Date(state.taskEdit.date).getFullYear());
+  const [month, setMonth] = useState(new Date(state.taskEdit.date).getMonth());
+  const [date, setDate] = useState(new Date(state.taskEdit.date).getDate());
+  const [time, setTime] = useState(
+    `${new Date(state.taskEdit.date).getHours()}:${new Date(
+      state.taskEdit.date
+    ).getMinutes()}`
+  );
 
   const [error, setError] = useState(initialTaskError);
   const { day, rest } = getTodaysDate(new Date(year, month, date));
@@ -53,8 +51,8 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
         title: 'Task title must have more than 3 characters',
       }));
     if (title.length > 3) {
-      const newTask = {
-        id: getNewTaskId(listId, lastTaskId),
+      const editedTask = {
+        id: state.taskEdit.id,
         title,
         note: desc,
         date: new Date(
@@ -67,18 +65,11 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
         complete: false,
       };
 
-      setError(initialTaskError);
-      setDesc('');
-      setTitle('');
-      setYear(new Date().getFullYear());
-      setMonth(new Date().getMonth());
-      setDate(new Date().getDate());
-      setTime('12:30');
-
       dispatch({
-        type: 'ADD_TASK',
-        payload: { listId: listId, task: newTask },
+        type: 'EDIT_TASK',
+        payload: { listId: listId, task: editedTask },
       });
+      dispatch({ type: 'CLEAR_EDIT_TASK' });
 
       setOpen();
     }
@@ -94,10 +85,28 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
     setDesc(theme);
   };
 
+  const handleClose = () => {
+    setOpen();
+    dispatch({ type: 'CLEAR_EDIT_TASK' });
+  };
+
+  useEffect(() => {
+    setTitle(state.taskEdit.title);
+    setDesc(state.taskEdit.note);
+    setYear(new Date(state.taskEdit.date).getFullYear());
+    setMonth(new Date(state.taskEdit.date).getMonth());
+    setDate(new Date(state.taskEdit.date).getDate());
+    setTime(
+      `${new Date(state.taskEdit.date).getHours()}:${new Date(
+        state.taskEdit.date
+      ).getMinutes()}`
+    );
+  }, [state]);
+
   return isOpen ? (
-    <section id="add-task-dialog">
+    <section id="edit-task-dialog">
       <div>
-        <button type="button" onClick={() => setOpen()}>
+        <button type="button" onClick={() => handleClose()}>
           +
         </button>
         <div>
@@ -172,11 +181,11 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
               </label>
             </div>
           </div>
-          <button type="submit">ADD TASK</button>
+          <button type="submit">SAVE TASK</button>
         </form>
       </div>
     </section>
   ) : null;
 };
 
-export default AddTaskDialog;
+export default EditTaskDialog;

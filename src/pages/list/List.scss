@@ -189,6 +189,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            cursor: pointer;
 
             & > svg {
               font-size: 1rem;
@@ -243,6 +244,7 @@
       height: 50px;
       box-shadow: 0px 10px 20px lighten($color: $red-color, $amount: 30);
       transition: scale 100ms ease-in-out;
+      cursor: pointer;
     }
 
     & > button:hover,
