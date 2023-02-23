@@ -43,6 +43,17 @@ export const getListId = (id: string | undefined) => {
   return String.fromCharCode(id.charCodeAt(0) + 1) + 'A';
 };
 
+export const getNewTaskId = (
+  listId: string | undefined,
+  lastTskId: string | undefined
+) => {
+  if (!lastTskId) return `${listId}-001`;
+  return `${listId}-${String(Number(lastTskId.slice(-3)) + 1).padStart(
+    3,
+    '0'
+  )}`;
+};
+
 export const getDays = () => {
   const today = new Date();
   const day = today.getDay();
@@ -148,4 +159,24 @@ export const getList = (list: ListType[], listId: string | undefined) => {
   });
 
   return { id, title: title || '', theme, tasks, lastModified };
+};
+
+export const getTheme = (theme: string) => {
+  const collections = [
+    '#00539CFF',
+    '#4831D4',
+    // '#C5FAD5',
+    '#F96167',
+    // '#E2D1F9',
+    '#317773',
+    '#8AAAE5',
+    '#FF69B4',
+    // '#99F443',
+    '#00FFFF',
+    // '#FCE77D',
+  ];
+
+  if (collections.includes(theme)) return '#FFF';
+
+  return '#161D43';
 };

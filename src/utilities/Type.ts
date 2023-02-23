@@ -17,9 +17,15 @@ export interface ListType {
 export interface AppState {
   list: ListType[];
   listEdit: ListType;
+  taskEdit: TaskType;
 }
 
 export interface ListError {
   title: string;
   theme: string;
+}
+
+export interface TaskError {
+  title: string;
+  // desc: string;
 }

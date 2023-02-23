@@ -1,4 +1,4 @@
-import { ListError } from './Type';
+import { ListError, TaskError } from './Type';
 
 export const DAYS = [
   'Sunday',
@@ -39,3 +39,4 @@ export const THEMES = [
 ];
 
 export const initialError: ListError = { title: '', theme: '' };
+export const initialTaskError: TaskError = { title: '' };
