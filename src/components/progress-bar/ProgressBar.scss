@@ -18,5 +18,10 @@
     align-items: center;
     padding: 0.5rem;
     min-width: 30px;
+
+    span {
+      margin: 0 auto;
+      font-weight: 600;
+    }
   }
 }

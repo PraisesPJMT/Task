@@ -1,4 +1,5 @@
 import {
+  faArrowLeftLong,
   faCheck,
   faPenToSquare,
   faTrashCan,
@@ -77,9 +78,12 @@ const List: React.FC<ListProps> = ({ state, dispatch }) => {
     <main>
       <section id="list">
         <section>
-          <section>
+          <section className='header'>
+            <a href='/' className='home-link'>
+              <FontAwesomeIcon icon={faArrowLeftLong} />
+            </a>
             <div>
-              <p>
+              <p className='date'>
                 <span>{day} </span>
                 <span>{rest}</span>
               </p>
@@ -175,8 +179,7 @@ const List: React.FC<ListProps> = ({ state, dispatch }) => {
                       <div>
                         <div>
                           <p id={item.complete ? 'complete' : ''}>
-                            {getStatus(new Date(item.date))}:{' '}
-                            {getDateTime(new Date(item.date))}
+                            Due: {getDateTime(new Date(item.date))}
                           </p>
                           <h3>{item.title}</h3>
                           <p>{item.note}</p>
