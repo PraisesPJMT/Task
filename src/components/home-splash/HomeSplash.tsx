@@ -1,4 +1,3 @@
-import LOGO from '../../assets/task.png';
 import './HomeSplash.scss';
 
 interface HomeSplashProps {
@@ -9,7 +8,7 @@ const HomeSplash: React.FC<HomeSplashProps> = ({ setOpen }) => {
   return (
     <section id="splash">
       <div>
-        <img src={LOGO} alt="T@sk Logo"/>
+        <img src={'./task.png'} alt="T@sk Logo" />
         <h1>T@sk</h1>
         <p>
           Organize your activities with <span>T@sk</span>

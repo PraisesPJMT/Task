@@ -9,7 +9,6 @@ import {
 } from '../../utilities/Helpers';
 import { AppState, ListType } from '../../utilities/Type';
 import ProgressBar from '../progress-bar/ProgressBar';
-import LOGO from '../../assets/task.png';
 import './HomeList.scss';
 
 interface HomeListProps {
@@ -38,7 +37,7 @@ const HomeList: React.FC<HomeListProps> = ({
     <section id="home">
       <section>
         <h1>
-          <img src={LOGO} alt="T@sk Logo" />
+          <img src={'./task.png'} alt="T@sk Logo" />
           T@sk
         </h1>
         <p>
