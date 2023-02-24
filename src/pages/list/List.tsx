@@ -14,11 +14,11 @@ import {
   getDays,
   getTodaysDate,
   getDateTime,
-  getStatus,
   getCompletedTasksCount,
   getList,
 } from '../../utilities/Helpers';
 import { AppState, ListType, TaskType } from '../../utilities/Type';
+import LOGO from '../../assets/task.png';
 import './List.scss';
 
 interface ListProps {
@@ -78,16 +78,19 @@ const List: React.FC<ListProps> = ({ state, dispatch }) => {
     <main>
       <section id="list">
         <section>
-          <section className='header'>
-            <a href='/' className='home-link'>
+          <section className="header">
+            <a href="/" className="home-link">
               <FontAwesomeIcon icon={faArrowLeftLong} />
             </a>
             <div>
-              <p className='date'>
+              <p className="date">
                 <span>{day} </span>
                 <span>{rest}</span>
               </p>
               <h1>{list.title}</h1>
+            </div>
+            <div>
+              <img src={LOGO} alt="T@sk Logo" className="logo" />
             </div>
             <div>
               <p>
