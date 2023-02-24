@@ -12,7 +12,14 @@
     padding: 2rem;
 
     h1 {
+      display: flex;
+      align-items: center;
       font-weight: 900;
+      color: $red-color;
+
+      img {
+        width: 50px;
+      }
     }
 
     p {
@@ -61,19 +68,19 @@
       border-radius: 40px 0 40px 0;
       box-shadow: 0px 5px 10px lighten($color: $harsh-color, $amount: 20),
         -1px -1px 10px lighten($color: $harsh-color, $amount: 15);
-      //   border: 1px solid #ccc;
+      cursor: pointer;
 
       & > div:first-child {
         display: flex;
         align-items: center;
         justify-content: center;
-        // border: 1px solid #ccc;
         border-radius: 40px 0 0 0;
+        color: $red-color;
+        font-weight: 900;
+        font-size: 1.5rem;
       }
 
       & > div:last-child {
-        // border: 1px solid #ccc;
-        // background: #ccc;
         border-radius: 0 0 40px 0;
       }
 
@@ -91,7 +98,6 @@
           h3 {
             font-size: 0.8rem;
             font-weight: 700;
-            // padding: 0;
           }
         }
 
@@ -111,6 +117,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            cursor: pointer;
 
             & > svg {
               font-size: 1rem;
@@ -146,6 +153,12 @@
       }
     }
 
+    & > div:hover,
+    & > div:focus {
+      border: 0.1rem solid $red-color;
+      box-shadow: 0px 4px 4px lighten($color: $red-color, $amount: 30);
+    }
+
     & > button {
       @include button;
       font-family: $font-works;
@@ -160,6 +173,7 @@
       height: 50px;
       box-shadow: 0px 10px 20px lighten($color: $red-color, $amount: 30);
       transition: scale 100ms ease-in-out;
+      cursor: pointer;
     }
 
     & > button:hover,

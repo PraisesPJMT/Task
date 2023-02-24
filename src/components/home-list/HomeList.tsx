@@ -2,9 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { ActionType } from '../../utilities/AppState';
-import { getSummary, getTodaysDate } from '../../utilities/Helpers';
+import {
+  getDateTime,
+  getSummary,
+  getTodaysDate,
+} from '../../utilities/Helpers';
 import { AppState, ListType } from '../../utilities/Type';
 import ProgressBar from '../progress-bar/ProgressBar';
+import LOGO from '../../assets/task.png';
 import './HomeList.scss';
 
 interface HomeListProps {
@@ -32,7 +37,10 @@ const HomeList: React.FC<HomeListProps> = ({
   return (
     <section id="home">
       <section>
-        <h1>T@sk</h1>
+        <h1>
+          <img src={LOGO} alt="T@sk Logo" />
+          T@sk
+        </h1>
         <p>
           <span>{day} </span>
           <span>{rest}</span>
@@ -55,15 +63,12 @@ const HomeList: React.FC<HomeListProps> = ({
         </div>
       </section>
       <section>
-        {state.list.map((item) => (
+        {state.list.map((item, index) => (
           <div key={item.id} onClick={() => navigate(`/list/${item.id}`)}>
-            <div />
+            <div>{index + 1}</div>
             <div>
               <div>
-                <p>
-                  Edited: <span>{getTodaysDate(item.lastModified).day} </span>
-                  <span>{getTodaysDate(item.lastModified).rest}</span>
-                </p>
+                <p>Created: {getDateTime(new Date(item.lastModified))}</p>
                 <h3>{item.title}</h3>
                 <p>{item.tasks.length} tasks</p>
               </div>

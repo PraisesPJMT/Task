@@ -95,7 +95,7 @@ export const getDays = () => {
       date: date + 3,
       day: DAYS[
         day + 3 > 6
-          ? DAYS.length - (day + 3 > DAYS.length ? DAYS.length : day + 3)
+          ? DAYS.length - (day + 3 > DAYS.length ? day + 1 : day + 3)
           : day + 3
       ],
     },

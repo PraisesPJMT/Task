@@ -7,6 +7,7 @@
 
   h1 {
     font-weight: 800;
+    color: $red-color;
   }
 
   & > section:first-child {
@@ -17,6 +18,10 @@
       top: 0;
       padding: 0.5rem 0;
       color: $blue-color;
+    }
+
+    .home-link:hover {
+      color: $red-color;
     }
 
     p.date {
@@ -31,6 +36,10 @@
       align-items: center;
       justify-content: space-between;
       padding: 2rem;
+
+      .logo {
+        width: 45px;
+      }
 
       & div:first-child {
         h1 {
@@ -145,6 +154,7 @@
       border-radius: 40px 0 40px 0;
       box-shadow: 0px 5px 10px lighten($color: $harsh-color, $amount: 20),
         -1px -1px 10px lighten($color: $harsh-color, $amount: 15);
+      cursor: pointer;
 
       & > div:first-child {
         display: flex;
@@ -243,6 +253,12 @@
           }
         }
       }
+    }
+
+    & .task:hover,
+    & .task:focus {
+      border: 0.1rem solid $red-color;
+      box-shadow: 0px 4px 4px lighten($color: $red-color, $amount: 30);
     }
 
     & .task.complete {

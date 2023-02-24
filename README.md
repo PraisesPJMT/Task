@@ -68,8 +68,13 @@
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🎞️ Preview <a name="preview"></a>
+> T@sk Application || List preview
 
-> Comming soon ...
+![Task Preview1](../Task/src/assets/preview_1.png)
+
+> T@sk Application || Task preview
+
+![Task Preview2](../Task/src/assets/preview_2.png)
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
