@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #aababcaa;
+  background-color: lighten($color: $light-harsh-color, $amount: 4);
 
   & > div {
     width: 100%;
