@@ -68,6 +68,7 @@
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🎞️ Preview <a name="preview"></a>
+
 > T@sk Application || List preview
 
 ![Task Preview1](../Task/src/assets/preview_1.png)
@@ -78,7 +79,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-> Comming soon ...
+> Deployed via Netlify: [T@sk](https://personal-task-app.netlify.app/)
 
 <!-- - [Live Demo Link]() -->
 
