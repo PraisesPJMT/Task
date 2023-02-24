@@ -18,7 +18,6 @@ import {
   getList,
 } from '../../utilities/Helpers';
 import { AppState, ListType, TaskType } from '../../utilities/Type';
-import LOGO from '../../assets/task.png';
 import './List.scss';
 
 interface ListProps {
@@ -90,7 +89,7 @@ const List: React.FC<ListProps> = ({ state, dispatch }) => {
               <h1>{list.title}</h1>
             </div>
             <div>
-              <img src={LOGO} alt="T@sk Logo" className="logo" />
+              <img src={'./../task.png'} alt="T@sk Logo" className="logo" />
             </div>
             <div>
               <p>
