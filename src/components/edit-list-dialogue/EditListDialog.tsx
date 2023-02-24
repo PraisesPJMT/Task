@@ -39,7 +39,7 @@ const EditListDialog: React.FC<EditListDialogProps> = ({
         id: state.listEdit.id,
         title,
         theme,
-        lastModified: new Date(),
+        lastModified: state.listEdit.lastModified,
         tasks: state.listEdit.tasks,
       };
 
