@@ -63,9 +63,9 @@ const HomeList: React.FC<HomeListProps> = ({
         </div>
       </section>
       <section>
-        {state.list.map((item) => (
+        {state.list.map((item, index) => (
           <div key={item.id} onClick={() => navigate(`/list/${item.id}`)}>
-            <div />
+            <div>{index + 1}</div>
             <div>
               <div>
                 <p>Created: {getDateTime(new Date(item.lastModified))}</p>
