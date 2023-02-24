@@ -71,11 +71,11 @@
 
 > T@sk Application || List preview
 
-![Task Preview1](../Task/src/assets/preview_1.png)
+![Task Preview1](./src/assets/preview_1.png)
 
 > T@sk Application || Task preview
 
-![Task Preview2](../Task/src/assets/preview_2.png)
+![Task Preview2](./src/assets/preview_2.png)
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
